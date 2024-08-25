@@ -1,4 +1,4 @@
-package com.puvi.mapscomposeguide.presentation
+package com.puvi.mapscomposeguide.presentation.composables
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.FloatingActionButton
@@ -11,8 +11,11 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import com.google.android.gms.maps.UiSettings
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.MapUiSettings
+import com.puvi.mapscomposeguide.presentation.MapEvent
+import com.puvi.mapscomposeguide.presentation.MapsViewModel
 
 @Composable
 fun MapScreen(

@@ -6,9 +6,12 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.maps.android.compose.MapProperties
+import com.puvi.mapscomposeguide.domain.ParkingSpotRepository
 import com.puvi.mapscomposeguide.presentation.MapStyle.json
+import javax.inject.Inject
 
-class MapsViewModel : ViewModel() {
+class MapsViewModel @Inject constructor(private val repository: ParkingSpotRepository) :
+    ViewModel() {
     var state by mutableStateOf(MapState())
 
     fun onEvent(event: MapEvent) {
