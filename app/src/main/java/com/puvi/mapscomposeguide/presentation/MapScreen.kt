@@ -11,12 +11,16 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.MapUiSettings
+import com.google.maps.android.compose.Marker
 
 @Composable
 fun MapScreen(
-    viewModel: MapsViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+    viewModel: MapsViewModel = hiltViewModel()
 ) {
     val scaffoldState = rememberScaffoldState()
     val uiSettings = remember {
@@ -37,7 +41,26 @@ fun MapScreen(
             modifier = Modifier.fillMaxSize(),
             properties = viewModel.state.properties,
             uiSettings = uiSettings,
-            onMapLongClick = {},
-        )
+            onMapLongClick = {
+                viewModel.onEvent(MapEvent.OnMapLongClick(it))
+            },
+        ) {
+            viewModel.state.parkingSpots.forEach { spot ->
+                Marker(
+                    position = LatLng(spot.lat, spot.lng),
+                    title = "Parking Spot (${spot.lat}, ${spot.lng})",
+                    snippet = "Long Click to Delete",
+                    onInfoWindowLongClick = {
+                        viewModel.onEvent(MapEvent.OnInfoWindowLongClick(spot))
+                    },
+                    onClick = {
+                        it.showInfoWindow()
+                        true
+                    },
+                    icon = BitmapDescriptorFactory
+                        .defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)
+                )
+            }
+        }
     }
 }

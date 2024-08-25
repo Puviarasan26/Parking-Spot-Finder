@@ -9,7 +9,9 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.puvi.mapscomposeguide.presentation.MapScreen
 import com.puvi.mapscomposeguide.ui.theme.MapsComposeGuideTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
